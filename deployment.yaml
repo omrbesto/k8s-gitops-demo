@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: 192.168.56.103:8081/spring-boot-app:latest
+        image: 192.168.56.103:8082/spring-boot-app:latest
         ports:
         - containerPort: 8080
 ---
