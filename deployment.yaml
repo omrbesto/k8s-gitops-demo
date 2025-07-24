@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: 192.168.56.103:8082/spring-boot-app:latest
+        image: 192.168.56.103:8082/demo-spring-boot-app:11
         ports:
         - containerPort: 8888
 ---
