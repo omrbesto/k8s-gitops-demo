@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: 192.168.56.103:8082/demo-spring-boot-app:23
+        image: 192.168.56.103:8082/demo-spring-boot-app:24
         ports:
         - containerPort: 8888
           name: http
