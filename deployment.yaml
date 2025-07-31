@@ -64,16 +64,20 @@ spec:
             cpu: "500m"
         livenessProbe:
           httpGet:
-            path: /actuator/health
+            path: /actuator/health/liveness   # เปลี่ยนจาก /actuator/health
             port: 8888
-          initialDelaySeconds: 30
-          periodSeconds: 10
+          initialDelaySeconds: 45  # เพิ่มเวลาให้แอปเริ่มต้นเสร็จ
+          periodSeconds: 15
+          timeoutSeconds: 5
+          failureThreshold: 3
         readinessProbe:
           httpGet:
-            path: /actuator/ready
+            path: /actuator/health/readiness  # เปลี่ยนจาก /actuator/ready
             port: 8888
-          initialDelaySeconds: 5
-          periodSeconds: 5
+          initialDelaySeconds: 15  # เพิ่มเวลาให้แอปเริ่มต้น
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
 ---
 apiVersion: v1
 kind: Service
