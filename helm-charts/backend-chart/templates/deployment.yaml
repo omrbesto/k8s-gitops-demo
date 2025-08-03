@@ -29,3 +29,8 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- end }}
+      {{- with .Values.podAnnotations }}
+      metadata:
+        annotations:
+          {{- toYaml . | nindent 10 }}
+      {{- end }}
