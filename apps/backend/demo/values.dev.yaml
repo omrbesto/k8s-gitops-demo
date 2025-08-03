@@ -31,3 +31,19 @@ resources:
   requests:
     cpu: 250m
     memory: 256Mi
+# Logging configuration
+logging:
+  enabled: true
+  level: "info"
+  format: "json"
+
+# Pod labels for log collection
+podLabels:
+  app: demo-backend
+  environment: dev
+  namespace: demo-back-dev
+
+# Annotations for log collection (ถ้าใช้ Fluentd/Fluent-bit)
+podAnnotations:
+  fluentbit.io/parser: "json"
+  prometheus.io/scrape: "true"
