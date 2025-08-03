@@ -13,7 +13,7 @@ spec:
     metadata:
       labels:
         app: {{ .Values.app.name }}
-      annotations:  # <-- ADD THIS BLOCK
+      annotations:
         {{- with .Values.podAnnotations }}
           {{- toYaml . | nindent 8 }}
           {{- end }}
