@@ -1,0 +1,33 @@
+# Default values for backend-chart
+replicaCount: 2
+
+image:
+  repository: 192.168.56.103:8082/demo-spring-boot-app
+  tag: "17"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8888
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  hosts:
+    - host: api.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+app:
+  name: spring-boot-app
+  containerPort: 8888
+
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}

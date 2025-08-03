@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-back-dev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/omrbesto/k8s-gitops-demo.git
+    targetRevision: dynamic-gitops
+    path: helm-charts/backend-chart
+    helm:
+      valueFiles:
+        - ../../apps/backend/demo/values.dev.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: demo-back-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
