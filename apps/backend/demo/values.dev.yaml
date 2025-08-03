@@ -31,19 +31,8 @@ resources:
   requests:
     cpu: 250m
     memory: 256Mi
-# Logging configuration
-logging:
-  enabled: true
-  level: "info"
-  format: "json"
-
-# Pod labels for log collection
-podLabels:
-  app: demo-backend
-  environment: dev
-  namespace: demo-back-dev
-
-# Annotations for log collection (ถ้าใช้ Fluentd/Fluent-bit)
+# เพิ่ม annotations สำหรับ Promtail ตรงนี้
 podAnnotations:
-  fluentbit.io/parser: "json"
-  prometheus.io/scrape: "true"
+  # Promtail จะใช้ annotation นี้เพื่อค้นหาและเก็บ log
+  kubernetes.io/scrape: "true"
+  kubernetes.io/path: "/var/log/containers/*"
