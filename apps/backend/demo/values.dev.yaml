@@ -3,7 +3,7 @@ app:
   name: demo-back-dev
 
 image:
-  repository: 192.168.56.103:8082/demo-back
+  repository: 192.168.56.103:8082/demo-spring-boot-app
   tag: "dev-latest"
 
 replicaCount: 1
