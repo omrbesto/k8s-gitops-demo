@@ -1,17 +1,49 @@
 # Development environment for Demo Backend
 app:
   name: demo-back-dev
-  containerPort: 8888  # แก้ไข port ให้ตรงกับที่ใช้
+  instance: demo-app
+  version: "dev"
+  managedBy: helm
+  containerPort: 8888
+  # Additional environment variables if needed
+  env: []
 
 image:
   repository: 192.168.56.103:8082/demo-spring-boot-app
   tag: "32"
+  pullPolicy: IfNotPresent
 
 replicaCount: 1
+
+# Logging configuration
+logging:
+  level:
+    root: "INFO"
+    application: "DEBUG"
+  # Additional logging annotations if needed
+  annotations: {}
+
+# Health check probes
+probes:
+  liveness:
+    enabled: true
+    path: /actuator/health/liveness
+    initialDelaySeconds: 45
+    periodSeconds: 15
+    timeoutSeconds: 5
+    failureThreshold: 3
+  readiness:
+    enabled: true
+    path: /actuator/health/readiness
+    initialDelaySeconds: 15
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
 
 service:
   type: ClusterIP
   port: 80
+  targetPort: 8888
 
 ingress:
   enabled: true
@@ -25,12 +57,10 @@ ingress:
         - path: /
           pathType: Prefix
 
-resources: {}
-# Add Log
-podAnnotations:
-  # Enable Promtail scraping
-  prometheus.io/scrape: "true"
-  prometheus.io/port: "8888"
-  # Add logging annotations
-  logging.io/collect: "true"
-  logging.io/format: "json"
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
