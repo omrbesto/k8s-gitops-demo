@@ -13,11 +13,10 @@ spec:
     metadata:
       labels:
         app: {{ .Values.app.name }}
-      annotations:
-        # เพิ่มส่วนนี้สำหรับ Promtail
-        promtail.io/scrape: "true"
-        promtail.io/port: "{{ .Values.app.containerPort }}"
-        promtail.io/format: "json"
+      annotations:  # <-- ADD THIS BLOCK
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
     spec:
       containers:
         - name: app
