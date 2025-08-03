@@ -27,15 +27,15 @@ logging:
 probes:
   liveness:
     enabled: true
-    path: /actuator/health/liveness
-    initialDelaySeconds: 45
-    periodSeconds: 15
-    timeoutSeconds: 5
-    failureThreshold: 3
+    path: /actuator/health  # ใช้ path ทั่วไปก่อน
+    initialDelaySeconds: 60  # เพิ่มเวลาให้แอปเริ่มต้น
+    periodSeconds: 30
+    timeoutSeconds: 10
+    failureThreshold: 5
   readiness:
     enabled: true
-    path: /actuator/health/readiness
-    initialDelaySeconds: 15
+    path: /actuator/health  # ใช้ path ทั่วไปก่อน
+    initialDelaySeconds: 30
     periodSeconds: 10
     timeoutSeconds: 5
     failureThreshold: 3
