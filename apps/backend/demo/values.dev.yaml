@@ -33,9 +33,17 @@ resources:
     memory: 256Mi
 # Logging annotations for Promtail/Loki
 podAnnotations:
-  # Add logging annotations
-  logging.io/collect: "true"
-  logging.io/format: "json"
-  # Enable Promtail scraping
-  prometheus.io/scrape: "true"
-  prometheus.io/port: "8888"
+  # Enable Promtail to scrape logs from this pod
+  # This label tells the Promtail scraping job to find this pod
+  promtail.io/scrape: "true"
+
+  # Path to the log file inside the container.
+  # This is usually where log files are stored
+  promtail.io/path: "/var/log/containers/*.log"
+
+  # The job name for logs in Loki
+  promtail.io/job: "demo-back-dev"
+
+  # The Loki pipeline stage for log parsing
+  promtail.io/pipeline-stages: |-
+    - docker: {}
