@@ -3,13 +3,6 @@ app:
   name: demo-back-dev
   containerPort: 8888  # แก้ไข port ให้ตรงกับที่ใช้
 
-  annotations:
-    promtail.io/scrape: "true"
-    promtail.io/format: "json"
-
-  env:
-    loggingPatternConsole: '{"timestamp":"%d{yyyy-MM-dd HH:mm:ss.SSS}","level":"%level","thread":"%thread","logger":"%logger{36}","message":"%msg","mdc":"%X"}%n'
-
 image:
   repository: 192.168.56.103:8082/demo-spring-boot-app
   tag: "32"
