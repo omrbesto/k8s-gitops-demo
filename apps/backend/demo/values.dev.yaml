@@ -33,5 +33,9 @@ resources:
     memory: 256Mi
 # Logging annotations for Promtail/Loki
 podAnnotations:
+  # Add logging annotations
   logging.io/collect: "true"
   logging.io/format: "json"
+  # Enable Promtail scraping
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "8888"
