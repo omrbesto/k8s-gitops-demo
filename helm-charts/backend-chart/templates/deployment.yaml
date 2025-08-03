@@ -12,10 +12,13 @@ spec:
   selector:
     matchLabels:
       app: {{ .Values.app.name }}
+      app.kubernetes.io/name: {{ .Values.app.name }}
+      app.kubernetes.io/instance: demo-app
   template:
     metadata:
       labels:
         app: {{ .Values.app.name }}
+        app.kubernetes.io/name: {{ .Values.app.name }}
       annotations:  # <-- ADD THIS BLOCK
         {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
