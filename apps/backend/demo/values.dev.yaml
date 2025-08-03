@@ -4,7 +4,7 @@ app:
 
 image:
   repository: 192.168.56.103:8082/demo-spring-boot-app
-  tag: "dev-latest"
+  tag: "32"
   pullPolicy: IfNotPresent
 
 replicaCount: 1
