@@ -24,8 +24,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.app.containerPort }}
-          {{- if .Values.resources }}
-          env: # เพิ่มส่วนนี้
+          env:  # <--- ส่วน env ที่ถูกต้อง
             - name: LOGGING_PATTERN_CONSOLE
               value: '{"timestamp":"%d{yyyy-MM-dd HH:mm:ss.SSS}","level":"%level","thread":"%thread","logger":"%logger{36}","message":"%msg","mdc":"%X"}%n'
             - name: POD_NAME
@@ -40,7 +39,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
-          { { - if .Values.resources } }
+          {{- if .Values.resources }}  # <--- ส่วน if ที่ถูกต้อง
           resources:
-            { { - toYaml .Values.resources | nindent 10 } }
-          { { - end } }
+            {{- toYaml .Values.resources | nindent 10 }}
+          {{- end }}
