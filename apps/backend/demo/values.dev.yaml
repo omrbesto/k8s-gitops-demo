@@ -31,8 +31,19 @@ resources:
   requests:
     cpu: 250m
     memory: 256Mi
-# เพิ่ม annotations สำหรับ Promtail ตรงนี้
+# ADD THIS NEW SECTION
 podAnnotations:
-  # Promtail จะใช้ annotation นี้เพื่อค้นหาและเก็บ log
-  kubernetes.io/scrape: "true"
-  kubernetes.io/path: "/var/log/containers/*"
+  # Enable Promtail to scrape logs from this pod
+  # This label tells the Promtail scraping job to find this pod
+  promtail.io/scrape: "true"
+
+  # Path to the log file inside the container.
+  # This is usually where log files are stored
+  promtail.io/path: "/var/log/containers/*.log"
+
+  # The job name for logs in Loki
+  promtail.io/job: "demo-back-dev"
+
+  # The Loki pipeline stage for log parsing
+  promtail.io/pipeline-stages: |-
+    - docker: {}
