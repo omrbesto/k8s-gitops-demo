@@ -4,7 +4,7 @@ app:
 
 image:
   repository: 192.168.56.103:8082/demo-back
-  tag: "29"
+  tag: "30"
 
 replicaCount: 1
 
