@@ -33,7 +33,7 @@ spec:
         {{- end }}
     spec:
       imagePullSecrets:
-        {{ - toYaml .Values.image.pullSecrets | nindent 8 }}
+        {{- toYaml .Values.image.pullSecrets | nindent 8 }}
       containers:
         - name: app
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
