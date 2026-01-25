@@ -9,8 +9,11 @@ app:
   env: []
 
 image:
-  repository: 192.168.56.103:8082/demo-spring-boot-app
-  tag: "1"
+  # IP และชื่อ repository ต้องตรงกับใน Nexus
+  repository: 192.168.56.102:8082/k8s-backend-demo
+  tag: "1" # หรือเลข build ล่าสุด
+  pullSecrets:
+    - name: nexus-pull-secret
   pullPolicy: IfNotPresent
 
 replicaCount: 1
