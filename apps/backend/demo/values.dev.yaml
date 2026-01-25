@@ -16,7 +16,7 @@ image:
     - name: nexus-pull-secret
   pullPolicy: IfNotPresent
 
-replicaCount: 1
+replicaCount: 2
 
 # Logging configuration
 logging:
